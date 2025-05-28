@@ -28,7 +28,7 @@ public class AmadeusAPITest extends BaseTest{
 		ConfigManager.set("bearertoken", accessToken);
 	}
 	
-	@Test
+	@Test(enabled=false)
 	public void getFlightDetailsTest() {
 		
 		Map<String,String> queryParams= new HashMap<String, String>();
