@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Products API Suite" verbose="4">
+ 
+   <listeners>
+	<listener class-name="com.aventstack.chaintest.plugins.ChainTestListener"/>
+   </listeners>
+   
+  <test name="Products - Get API"> 
+    <classes>
+      <class name="com.qa.api.products.tests.ProductAPITest"/>
+    </classes>
+  </test> 
+  
+  <test name="Products -Get API With JSON Path"> 
+    <classes>
+      <class name="com.qa.api.products.tests.ProductAPITestWithJsonPath"/>
+    </classes>
+  </test> 
+ 
+</suite> <!-- Suite -->

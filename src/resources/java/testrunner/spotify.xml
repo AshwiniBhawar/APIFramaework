@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Spotify API Suite" verbose="4">
+ 
+    <listeners>
+	<listener class-name="com.aventstack.chaintest.plugins.ChainTestListener"/>
+   </listeners>
+  
+  <test name="Spotify API Test"> 
+    <classes>
+      <class name="com.qa.api.spotify.tests.SpotifyAPITest"/>
+    </classes>
+  </test> 
+  
+  
+</suite> <!-- Suite -->

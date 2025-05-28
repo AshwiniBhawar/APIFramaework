@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Contacts API Suite" verbose="4">
+ 
+    <listeners>
+	<listener class-name="com.aventstack.chaintest.plugins.ChainTestListener"/>
+   </listeners>
+  
+  <test name="Contact - Get API"> 
+    <classes>
+      <class name="com.qa.api.gorest.tests.GetUserTest"/>
+    </classes>
+  </test> 
+  
+  <test name="Contact - Create API"> 
+    <classes>
+      <class name="com.qa.api.contacts.tests.CreateContactTest"/>
+    </classes>
+  </test> 
+  
+  <test name="Contact - Update API"> 
+    <classes>
+      <class name="com.qa.api.contacts.tests.UpdateAContactTest"/>
+    </classes>
+  </test> 
+  
+  <test name="Contact - Update API With Mandatory Fields Only"> 
+    <classes>
+      <class name="com.qa.api.contacts.tests.UpdateAContactWithMandatoryFieldsTest"/>
+    </classes>
+  </test> 
+  
+  <test name="Contact- Delete API"> 
+    <classes>
+      <class name="com.qa.api.contacts.tests.DeleteAContactTest"/>
+    </classes>
+  </test> 
+    
+</suite> <!-- Suite -->
