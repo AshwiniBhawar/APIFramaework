@@ -39,7 +39,7 @@ pipeline {
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
 					git "https://github.com/AshwiniBhawar/APIFramaework.git"
-               		bat "mvn clean test -Dsurefire.suiteXmlFile=/src/test/resources/testrunner/regression.xml"
+               		bat "mvn clean test -Dsurefire.suiteXmlFile=src/test/resources/testrunner/regression.xml"
 				}
             }
         }
@@ -83,7 +83,7 @@ pipeline {
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
 					git "https://github.com/AshwiniBhawar/APIFramaework.git"
-               		bat "mvn clean test -Dsurefire.suiteXmlFile=/src/test/resources/testrunner/sanity.xml"
+               		bat "mvn clean test -Dsurefire.suiteXmlFile=src/test/resources/testrunner/sanity.xml"
 				}
             }
         }
