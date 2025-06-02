@@ -21,7 +21,7 @@ pipeline {
                 bat "mvn -Dmaven.test.failure.ignore=true clean package"
             }
             post{
-				sucess{
+				success{
 					junit '**/target/surefire-report/Test-*.xml'
 					archiveArtifacts 'target/*.jar'
 				}
@@ -57,7 +57,7 @@ pipeline {
 				}
 			}
 			
-		stage('Publish ChainTest Report') {
+		stage('Publish ChainTest Report For REGRESSION') {
 			steps {
                     publishHTML([
                             allowMissing: false,
@@ -87,7 +87,7 @@ pipeline {
             }
         }
         			
-		stage('Publish ChainTest Report') {
+		stage('Publish ChainTest Report FOR SANITY') {
 					steps {
                         publishHTML([
                             allowMissing: false,
