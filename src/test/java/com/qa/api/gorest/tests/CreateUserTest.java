@@ -68,7 +68,7 @@ public class CreateUserTest extends BaseTest {
 		Assert.assertEquals(response.jsonPath().getString("name"), "Crane");
 		Assert.assertNotNull(response.jsonPath().getString("id"));
 		Assert.assertTrue(response.statusLine().contains("Created"));
-		ChainTestListener.log("user id: "+ response.jsonPath().getString("id"));
+		ChainTestListener.log("user id is: "+ response.jsonPath().getString("id"));
 	}
 
 	@Test
