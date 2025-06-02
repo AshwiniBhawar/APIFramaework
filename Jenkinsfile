@@ -98,10 +98,9 @@ pipeline {
                             reportName: 'HTML API Regression ChainTest Report',
                             reportTitles: ''
                         ])               
-					}
 				}
-			}
-        }
+		}
+		
         
         stage("Deploy to Prod") {
             steps {
