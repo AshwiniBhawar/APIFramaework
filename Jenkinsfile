@@ -14,6 +14,7 @@ pipeline {
                 }
             }
         }
+        
         stage('Build') {
             steps {
                 git "https://github.com/jglick/simple-maven-project-with-tests.git"
@@ -43,7 +44,7 @@ pipeline {
         }
         
         stage('Publish Allure Reports') {
-				stage('Publish GoRest Report') {
+				steps {
                     script {
                         allure([
                             includeProperties: false,
@@ -57,8 +58,8 @@ pipeline {
 			}
 			
 		stage('Publish ChainTest Report') {
-					steps {
-                        publishHTML([
+			steps {
+                    publishHTML([
                             allowMissing: false,
                             alwaysLinkToLastBuild: false,
                             keepAll: true,
@@ -67,10 +68,9 @@ pipeline {
                             reportName: 'HTML API Regression ChainTest Report',
                             reportTitles: ''
                         ])               
-					}
 				}
-			}
-        }
+		}
+			
 
         stage("Deploy to Stage") {
             steps {
@@ -107,5 +107,5 @@ pipeline {
                 echo "Deploying to Stage"
             }
         }
-
+	}
 }
