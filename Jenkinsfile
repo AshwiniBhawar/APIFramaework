@@ -43,6 +43,21 @@ pipeline {
 				}
             }
         }
+        
+        stage('Publish ChainTest Report For Dev') {
+			steps {
+                    publishHTML([
+                            allowMissing: false,
+                            alwaysLinkToLastBuild: false,
+                            keepAll: true,
+                            reportDir: 'target/chaintest',
+                            reportFiles: '*.html',
+                            reportName: 'HTML API Sanity ChainTest Report For Dev',
+                            reportTitles: ''
+                        ])               
+				}
+		}
+			
 
         stage("Deploy to QA") {
             steps {
@@ -50,7 +65,7 @@ pipeline {
             }
         }
 		
-        stage('Regression API Automation Tests For QA') {
+        stage('Sanity API Automation Tests For QA') {
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
 					git "https://github.com/AshwiniBhawar/APIFramaework.git"
@@ -59,21 +74,8 @@ pipeline {
             }
         }
         
-        stage('Publish Allure Reports') {
-				steps {
-                    script {
-                        allure([
-                            includeProperties: false,
-                           	jdk: '',
-                            properties: [],
-                            reportBuildPolicy: 'ALWAYS',
-                            results: [[path: '/allure-results']]
-                        ])               
-					}
-				}
-			}
 			
-		stage('Publish ChainTest Report For REGRESSION') {
+		stage('Publish ChainTest Report For QA') {
 			steps {
                     publishHTML([
                             allowMissing: false,
@@ -81,7 +83,7 @@ pipeline {
                             keepAll: true,
                             reportDir: 'target/chaintest',
                             reportFiles: '*.html',
-                            reportName: 'HTML API Regression ChainTest Report',
+                            reportName: 'HTML API Sanity ChainTest Report For QA',
                             reportTitles: ''
                         ])               
 				}
@@ -103,7 +105,7 @@ pipeline {
             }
         }
         			
-		stage('Publish ChainTest Report FOR SANITY') {
+		stage('Publish ChainTest Report For Stage') {
 					steps {
                         publishHTML([
                             allowMissing: false,
@@ -111,7 +113,7 @@ pipeline {
                             keepAll: true,
                             reportDir: 'target/chaintest',
                             reportFiles: '*.html',
-                            reportName: 'HTML API Sanity ChainTest Report',
+                            reportName: 'HTML API Sanity ChainTest Report For Stage',
                             reportTitles: ''
                         ])               
 				}
@@ -124,7 +126,7 @@ pipeline {
             }
         }
         
-        stage('Sanity API Automation Tests For Prod') {
+        stage('Regression API Automation Tests For Prod') {
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
 					git "https://github.com/AshwiniBhawar/APIFramaework.git"
@@ -132,5 +134,33 @@ pipeline {
 				}
             }
         }
+        
+        stage('Publish Allure Reports For Prod') {
+				steps {
+                    script {
+                        allure([
+                            includeProperties: false,
+                           	jdk: '',
+                            properties: [],
+                            reportBuildPolicy: 'ALWAYS',
+                            results: [[path: '/allure-results']]
+                       ])               
+				}
+			}
+		}
+			
+        stage('Publish ChainTest Report For Prod') {
+					steps {
+                        publishHTML([
+                            allowMissing: false,
+                            alwaysLinkToLastBuild: false,
+                            keepAll: true,
+                            reportDir: 'target/chaintest',
+                            reportFiles: '*.html',
+                            reportName: 'HTML API Sanity ChainTest Report For Prod',
+                            reportTitles: ''
+                        ])               
+				}
+		}
 	}
 }
