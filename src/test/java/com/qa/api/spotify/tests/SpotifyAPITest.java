@@ -31,7 +31,7 @@ public class SpotifyAPITest extends BaseTest{
 	@Test
 	public void getFlightDetailsTest() {
 		
-		Response response=restClient.get(BASE_URL_OAUTH2_ALBUM_SPOTIFY, SPOTIFY_ALBUM_ENDPOINT, null ,null , AuthType.BEARER_TOKEN, ContentType.ANY);
+		Response response=restClient.get(BASE_URL_OAUTH2_ALBUM_SPOTIFY, SPOTIFY_OAUTH2_ALBUM_ENDPOINT, null ,null , AuthType.BEARER_TOKEN, ContentType.ANY);
 		Assert.assertEquals(response.statusCode(), 200);
 	
 	}

@@ -7,6 +7,7 @@ import java.util.Properties;
 public class ConfigManager {
 		
 	private static Properties properties=new Properties();
+	
 	static {
 		//mvn clean install -Denv=qa/uat/stage/dev/prod
 		//mvn clean install -Denv=qa
@@ -16,7 +17,8 @@ public class ConfigManager {
 		String envName=System.getProperty("env","prod");
 		System.out.println("Running the text on: "+envName);
 		
-		String filename= "config."+envName+".properties";
+		String filename= "config_"+envName+".properties";
+		System.out.println(filename);
 		
 		InputStream input=ConfigManager.class.getClassLoader().getResourceAsStream(filename);
 		if(input != null) {

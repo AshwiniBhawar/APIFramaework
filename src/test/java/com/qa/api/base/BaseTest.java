@@ -34,21 +34,22 @@ public class BaseTest {
 	protected static final  String AMADEUS_OAUTH2_TOKEN_ENDPOINT="/v1/security/oauth2/token";
 	protected static final  String AMADEUS_FLIGHT_DESTINATION_ENDPOINT="/v1/shopping/flight-destinations?origin=PAR&maxPrice=200";
 	protected static final  String SPOTIFY_OAUTH2_TOKEN_ENDPOINT="/api/token";
-	protected static final  String SPOTIFY_ALBUM_ENDPOINT="/v1/albums/4aawyAB9vmqN3uQ7FjRGTy";
+	protected static final  String SPOTIFY_OAUTH2_ALBUM_ENDPOINT="/v1/albums/4aawyAB9vmqN3uQ7FjRGTy";
 	protected static final  String ERGAST_CIRCUIT_ENDPOINT="/api/f1/2017/circuits.xml";
 	
 	@BeforeSuite
 	public void initialSetUp() {
 		RestAssured.filters(new AllureRestAssured());
-		BASE_URL_GOREST=ConfigManager.get("baseurl.gorest").trim();
-		BASE_URL_CONTACTS=ConfigManager.get("baseurl.contacts").trim();
-		BASE_URL_REQRES=ConfigManager.get("baseurl.reqres").trim();
-		BASE_URL_BASICAUTH=ConfigManager.get("baseurl.basicauth").trim();
-		BASE_URL_PRODUCTS=ConfigManager.get("baseurl.products").trim();
-		BASE_URL_OAUTH2_AMADEUS=ConfigManager.get("baseurl.oauth2.amadeus").trim();
-		BASE_URL_OAUTH2_SPOTIFY=ConfigManager.get("baseurl.oauth2.spotify").trim();
-		BASE_URL_OAUTH2_ALBUM_SPOTIFY=ConfigManager.get("baseurl.oauth2.spotify").trim();
-		BASE_URL_ERGAST_CIRCUIT=ConfigManager.get("baseurl.ergast.circuit").trim();
+		
+		BASE_URL_GOREST=ConfigManager.get("baseurl.gorest");
+		BASE_URL_CONTACTS=ConfigManager.get("baseurl.contacts");
+		BASE_URL_REQRES=ConfigManager.get("baseurl.reqres");
+		BASE_URL_BASICAUTH=ConfigManager.get("baseurl.basicauth");
+		BASE_URL_PRODUCTS=ConfigManager.get("baseurl.products");
+		BASE_URL_OAUTH2_AMADEUS=ConfigManager.get("baseurl.oauth2.amadeus");
+		BASE_URL_OAUTH2_SPOTIFY=ConfigManager.get("baseurl.oauth2.spotify");
+		BASE_URL_OAUTH2_ALBUM_SPOTIFY=ConfigManager.get("baseurl.oauth2.album.spotify");
+		BASE_URL_ERGAST_CIRCUIT=ConfigManager.get("baseurl.ergast.circuit");
 	}
 	
 	@BeforeTest
