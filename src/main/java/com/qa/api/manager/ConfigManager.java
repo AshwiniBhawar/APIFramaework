@@ -5,13 +5,24 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class ConfigManager {
-	
+		
 	private static Properties properties=new Properties();
 	static {
-		InputStream input=ConfigManager.class.getClassLoader().getResourceAsStream("config/config.properties");
+		//mvn clean install -Denv=qa/uat/stage/dev/prod
+		//mvn clean install -Denv=qa
+		//mvn clean install-- if env is not given, then run test cases on QA env by default.
+		//env --environment variable(system)
+		
+		String envName=System.getProperty("env","prod");
+		System.out.println("Running the text on: "+envName);
+		
+		String filename= "config."+envName+".properties";
+		
+		InputStream input=ConfigManager.class.getClassLoader().getResourceAsStream(filename);
 		if(input != null) {
 			try {
 				properties.load(input);
+				System.out.println("properties=====>"+properties);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

@@ -28,6 +28,21 @@ pipeline {
 				}
 			}
         }
+        
+        stage("Deploy to Dev") {
+            steps {
+                echo "Deploying to Dev"
+            }
+        }
+        
+        stage('Sanity API Automation Tests For Dev') {
+            steps {
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
+					git "https://github.com/AshwiniBhawar/APIFramaework.git"
+               		bat "mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testrunner/sanity.xml -Denv=dev"
+				}
+            }
+        }
 
         stage("Deploy to QA") {
             steps {
@@ -39,7 +54,7 @@ pipeline {
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
 					git "https://github.com/AshwiniBhawar/APIFramaework.git"
-               		bat "mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testrunner/regression.xml"
+               		bat "mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testrunner/sanity.xml -Denv=qa"
 				}
             }
         }
@@ -83,7 +98,7 @@ pipeline {
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
 					git "https://github.com/AshwiniBhawar/APIFramaework.git"
-               		bat "mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testrunner/sanity.xml"
+               		bat "mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testrunner/sanity.xml -Denv=stage"
 				}
             }
         }
@@ -96,7 +111,7 @@ pipeline {
                             keepAll: true,
                             reportDir: 'target/chaintest',
                             reportFiles: '*.html',
-                            reportName: 'HTML API Regression ChainTest Report',
+                            reportName: 'HTML API Sanity ChainTest Report',
                             reportTitles: ''
                         ])               
 				}
@@ -105,7 +120,16 @@ pipeline {
         
         stage("Deploy to Prod") {
             steps {
-                echo "Deploying to Stage"
+                echo "Deploying to Prod"
+            }
+        }
+        
+        stage('Sanity API Automation Tests For Prod') {
+            steps {
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
+					git "https://github.com/AshwiniBhawar/APIFramaework.git"
+               		bat "mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testrunner/regression.xml -Denv=prod"
+				}
             }
         }
 	}

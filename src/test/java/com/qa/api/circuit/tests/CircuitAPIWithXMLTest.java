@@ -16,7 +16,7 @@ public class CircuitAPIWithXMLTest extends BaseTest{
 	
 	@Test
 	public void getCircuitInfoTest() {
-	Response response=restClient.get(BASE_URL_EARGST_CIRCUIT, EARGST_CIRCUIT_ENDPOINT, null, null, AuthType.NO_AUTH, ContentType.ANY);
+	Response response=restClient.get(BASE_URL_ERGAST_CIRCUIT, ERGAST_CIRCUIT_ENDPOINT, null, null, AuthType.NO_AUTH, ContentType.ANY);
 	
 	List<String> circuitNames=XmlPathUtil.readList(response, "MRData.CircuitTable.Circuit.CircuitName");
 	System.out.println(circuitNames);

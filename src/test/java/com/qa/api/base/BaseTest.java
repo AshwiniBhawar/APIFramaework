@@ -4,6 +4,8 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import io.qameta.allure.restassured.AllureRestAssured;
 import com.qa.api.client.RestClient;
+import com.qa.api.manager.ConfigManager;
+
 import io.restassured.RestAssured;
 
 //@Listeners(ChainTestListener.class)
@@ -11,15 +13,15 @@ public class BaseTest {
 
 	protected RestClient restClient;
 	//*******************************API Base Urls***********************************//
-	protected static final  String BASE_URL_GOREST="https://gorest.co.in";
-	protected static final  String BASE_URL_CONTACTS="http://thinking-tester-contact-list.herokuapp.com";
-	protected static final  String BASE_URL_REQRES="https://reqres.in";
-	protected static final  String BASE_URL_BASICAUTH="https://the-internet.herokuapp.com";
-	protected static final  String BASE_URL_PRODUCTS="https://fakestoreapi.com";
-	protected static final  String BASE_URL_OAUTH2_AMADEUS="https://test.api.amadeus.com";
-	protected static final  String BASE_URL_OAUTH2_SPOTIFY="https://accounts.spotify.com";
-	protected static final  String BASE_URL_OAUTH2_ALBUM_SPOTIFY="https://api.spotify.com";
-	protected static final String BASE_URL_EARGST_CIRCUIT="http://ergast.com";
+	protected static String BASE_URL_GOREST;
+	protected static String BASE_URL_CONTACTS;
+	protected static String BASE_URL_REQRES;
+	protected static String BASE_URL_BASICAUTH;
+	protected static String BASE_URL_PRODUCTS;
+	protected static String BASE_URL_OAUTH2_AMADEUS;
+	protected static String BASE_URL_OAUTH2_SPOTIFY;
+	protected static String BASE_URL_OAUTH2_ALBUM_SPOTIFY;
+	protected static String BASE_URL_ERGAST_CIRCUIT;
 	
 	//*******************************API Endpoints***********************************//
 	protected static final  String GOREST_USERS_ENDPOINT="/public/v2/users";
@@ -33,11 +35,20 @@ public class BaseTest {
 	protected static final  String AMADEUS_FLIGHT_DESTINATION_ENDPOINT="/v1/shopping/flight-destinations?origin=PAR&maxPrice=200";
 	protected static final  String SPOTIFY_OAUTH2_TOKEN_ENDPOINT="/api/token";
 	protected static final  String SPOTIFY_ALBUM_ENDPOINT="/v1/albums/4aawyAB9vmqN3uQ7FjRGTy";
-	protected static final  String EARGST_CIRCUIT_ENDPOINT="/api/f1/2017/circuits.xml";
+	protected static final  String ERGAST_CIRCUIT_ENDPOINT="/api/f1/2017/circuits.xml";
 	
 	@BeforeSuite
-	public void setUpAllureReport() {
+	public void initialSetUp() {
 		RestAssured.filters(new AllureRestAssured());
+		BASE_URL_GOREST=ConfigManager.get("baseurl.gorest").trim();
+		BASE_URL_CONTACTS=ConfigManager.get("baseurl.contacts").trim();
+		BASE_URL_REQRES=ConfigManager.get("baseurl.reqres").trim();
+		BASE_URL_BASICAUTH=ConfigManager.get("baseurl.basicauth").trim();
+		BASE_URL_PRODUCTS=ConfigManager.get("baseurl.products").trim();
+		BASE_URL_OAUTH2_AMADEUS=ConfigManager.get("baseurl.oauth2.amadeus").trim();
+		BASE_URL_OAUTH2_SPOTIFY=ConfigManager.get("baseurl.oauth2.spotify").trim();
+		BASE_URL_OAUTH2_ALBUM_SPOTIFY=ConfigManager.get("baseurl.oauth2.spotify").trim();
+		BASE_URL_ERGAST_CIRCUIT=ConfigManager.get("baseurl.ergast.circuit").trim();
 	}
 	
 	@BeforeTest
