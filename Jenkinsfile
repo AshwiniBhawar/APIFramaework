@@ -6,7 +6,7 @@ pipeline {
 	}
 	
 	environment {
-        DOCKER_IMAGE = "ashwinibhawar2892/apiframework:${BUILD_NUMBER}"
+        DOCKER_IMAGE = "ashwinibhawar2892/apiautomationframework:${BUILD_NUMBER}"
         DOCKER_CREDENTIALS_ID = 'dockerhub_credentials'
     }
 	
