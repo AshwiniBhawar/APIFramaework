@@ -11,6 +11,30 @@ pipeline {
     }
 	
     stages {
+	
+		stage('Clean Workspace') {
+            steps {
+                script {
+                    // Clean the workspace before running the job
+                    cleanWs()
+                }
+            }
+        }
+        
+        stage('Build') {
+            steps {
+                git 'https://github.com/jglick/simple-maven-project-with-tests.git'
+                bat "mvn -Dmaven.test.failure.ignore=true clean package"
+            }
+            
+            post{
+				success{
+					junit '**/target/surefire-reports/TEST-*.xml'
+                    archiveArtifacts 'target/*.jar'
+				}
+			}
+        }
+        
         stage('Checkout Code') {
             steps {
                 git 'https://github.com/AshwiniBhawar/APIFramaework.git'
