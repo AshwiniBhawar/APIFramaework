@@ -19,7 +19,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                bat "docker build -t ${DOCKER_IMAGE} ."
+                bat "docker build -t %DOCKER_IMAGE% ."
             }
         }
 
@@ -31,8 +31,8 @@ pipeline {
                     passwordVariable: 'DOCKER_PASS'
                 )]) {
                     bat '''
-                        echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
-                        docker push ${DOCKER_IMAGE}
+                        echo %DOCKER_PASS% | docker login -u %DOCKER_USER% --password-stdin
+                        docker push %DOCKER_IMAGE%
                        '''
                 }
             }
@@ -49,7 +49,7 @@ pipeline {
                 script {
             def status = bat(
                 script: """
-                    docker run --rm -v \$WORKSPACE:/app -w /app ${DOCKER_IMAGE} \
+                    docker run --rm -v "%WORKSPACE%":/app -w /app %DOCKER_IMAGE% \
                     mvn test -Dsurefire.suiteXmlFiles=src/test/resources/testrunners/sanity.xml -Denv=prod
                 """,
                 returnStatus: true
@@ -87,7 +87,7 @@ pipeline {
                 script {
                     def status = bat(
                         script: """
-                  				  docker run --rm -v \$WORKSPACE:/app -w /app ${DOCKER_IMAGE} \
+                  				  docker run --rm -v "%WORKSPACE%":/app -w /app %DOCKER_IMAGE% \
                   				  mvn test -Dsurefire.suiteXmlFiles=src/test/resources/testrunners/regression.xml -Denv=prod
                					 """,
                         returnStatus: true
@@ -126,7 +126,7 @@ pipeline {
                 script {
                     def status = bat(
                         script: """
-                    			docker run --rm -v \$WORKSPACE:/app -w /app ${DOCKER_IMAGE} \
+                    			docker run --rm -v "%WORKSPACE%":/app -w /app %DOCKER_IMAGE% \
                     			mvn test -Dsurefire.suiteXmlFiles=src/test/resources/testrunners/sanity.xml -Denv=prod
                 				""",
                         returnStatus: true
@@ -165,7 +165,7 @@ pipeline {
                 script {
                     def status = bat(
                         script: """
-                    			docker run --rm -v \$WORKSPACE:/app -w /app ${DOCKER_IMAGE} \
+                    			docker run --rm -v "%WORKSPACE%":/app -w /app %DOCKER_IMAGE% \
                     			mvn test -Dsurefire.suiteXmlFiles=src/test/resources/testrunners/sanity.xml -Denv=prod
                				 """,
                         returnStatus: true
